@@ -22,7 +22,7 @@ const FormProduct = () => {
   if (!id) {
     return (
       <LayoutBase>
-        <ProductForm />
+        <ProductForm key={'new'}/>
       </LayoutBase>
     )
   }
@@ -37,7 +37,7 @@ const FormProduct = () => {
   // Retorna formulario de edicion
   return (
     <LayoutBase>
-      <ProductForm id={id} product={product} />
+      <ProductForm key={id} id={id} product={product} />
     </LayoutBase>
   )
 
