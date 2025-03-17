@@ -1,7 +1,11 @@
+import ProductForm from "@components/ProductForm"
+import LayoutBase from "@layouts/LayoutBase"
 
 const AddProduct = () => {
   return (
-    <div>AddProduct</div>
+    <LayoutBase>
+      <ProductForm />
+    </LayoutBase>
   )
 }
 
