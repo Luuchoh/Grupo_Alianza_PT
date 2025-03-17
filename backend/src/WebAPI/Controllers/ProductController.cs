@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace WebAPI.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")] 
+    [Route("api/[controller]")]
     public class ProductoController : ControllerBase 
     { 
         private readonly IProduct _repository; 
@@ -32,7 +32,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                Product product = await _repository.GetByIdAsync(id);
+                Product product = await _repository.GetById(id);
                 if (product == null) return NoContent();
                 return Ok(product);
             }
@@ -47,7 +47,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                await _repository.AddAsync(producto);
+                await _repository.Add(producto);
                 return CreatedAtAction(nameof(GetById), new { id = producto.Id }, producto);
             }
             catch (Exception e)
@@ -62,7 +62,7 @@ namespace WebAPI.Controllers
             try
             {
                 if (id != producto.Id) return BadRequest();
-                await _repository.UpdateAsync(producto);
+                await _repository.Update(producto);
                 return NoContent();
             }
             catch (Exception e)
@@ -76,7 +76,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                await _repository.DeleteAsync(id);
+                await _repository.Delete(id);
                 return NoContent();
             }
             catch (Exception e)
