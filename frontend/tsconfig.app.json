@@ -29,7 +29,7 @@
       "@context/*": ["./src/context/*"],
       "@hooks/*": ["./src/hooks/*"],
       "@pages/*": ["./src/pages/*"],
-      "@router/*": ["./src/router/*"],
+      "@routes/*": ["./src/routes/*"],
     }
   },
   "include": ["src", "vite-env.d.ts", "**/*.ts", "**/*.tsx"],
