@@ -1,5 +1,13 @@
 import { NavLink } from "react-router";
 
+/**
+ * Componente que envuelve el contenido principal de la pagina
+ * 
+ * @param { any } props - propiedades del componente
+ * @param { React.FC } props.children - componente principal 
+ * @returns componente 
+ */
+
 const LayoutBase = (props: any) => {
   const { children } = props;
 
