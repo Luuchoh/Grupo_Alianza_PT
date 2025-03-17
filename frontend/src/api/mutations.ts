@@ -9,12 +9,19 @@ export const useCreateProduct = () => {
   });
 };
 
-
 export const useUpdateProduct = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (updatedProduct: Product) =>
       axiosInstance.put(`/producto/${updatedProduct.id}`, updatedProduct),
+    onSuccess: () => queryClient.invalidateQueries(["products"]),
+  });
+};
+
+export const useDeleteProduct = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (id: number) => axiosInstance.delete(`/producto/${id}`),
     onSuccess: () => queryClient.invalidateQueries(["products"]),
   });
 };
