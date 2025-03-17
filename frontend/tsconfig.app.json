@@ -31,6 +31,7 @@
       "@pages/*": ["./src/pages/*"],
       "@routes/*": ["./src/routes/*"],
       "@layouts/*": ["./src/layouts/*"],
+      "@test/*": ["./src/test/*"],
     }
   },
   "include": ["src", "vite-env.d.ts", "**/*.ts", "**/*.tsx"],
