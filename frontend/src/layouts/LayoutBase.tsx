@@ -23,7 +23,7 @@ const LayoutBase = (props: any) => {
         </nav>
       </header>
 
-      <main className="flex-1 flex justify-center items-center w-[75vw] max-w-[960px] p-4 mt-16">
+      <main className="flex-1 flex flex-wrap justify-center items-center w-[75vw] max-w-[960px] p-4 mt-16">
         {children}
       </main>
     </div>

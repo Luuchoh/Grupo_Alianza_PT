@@ -68,88 +68,93 @@ const ProductForm: React.FC<ProductFormInterface> = (props) => {
   });
 
   return (
-    <form onSubmit={formik.handleSubmit} className="mt-8 w-full grid gap-6">
-      <div className="col-span-10">
-        <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-          Nombre
-        </label>
+    <>
+      <form onSubmit={formik.handleSubmit} className="mt-8 w-full grid gap-6">
+        <h2 className="w-full text-2xl font-bold text-gray-900 mb-2">
+          {Number(id) ? 'Editar Producto' : 'Crear Producto'}
+        </h2>
+        <div className="col-span-10">
+          <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+            Nombre
+          </label>
 
-        <input
-          type="text"
-          id="name"
-          name="name"
-          className="mt-1 w-full rounded-md border border-gray bg-white text-sm text-gray-700 shadow-xs p-2"
-          value={formik.values.name}
-          onChange={formik.handleChange}
-        />
+          <input
+            type="text"
+            id="name"
+            name="name"
+            className="mt-1 w-full rounded-md border border-gray bg-white text-sm text-gray-700 shadow-xs p-2"
+            value={formik.values.name}
+            onChange={formik.handleChange}
+          />
 
-        {formik.touched.name && formik.errors.name && (
-          <div className="text-red-500 text-xs mt-1">{formik.errors.name}</div>
-        )}
-      </div>
+          {formik.touched.name && formik.errors.name && (
+            <div className="text-red-500 text-xs mt-1">{formik.errors.name}</div>
+          )}
+        </div>
 
-      <div className="col-span-10">
-        <label htmlFor="description" className="block text-sm font-medium text-gray-700">
-          Descripcion
-        </label>
+        <div className="col-span-10">
+          <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+            Descripcion
+          </label>
 
-        <input
-          type="text"
-          id="description"
-          name="description"
-          className="mt-1 w-full rounded-md border border-gray bg-white text-sm text-gray-700 shadow-xs p-2"
-          value={formik.values.description}
-          onChange={formik.handleChange}
-        />
+          <input
+            type="text"
+            id="description"
+            name="description"
+            className="mt-1 w-full rounded-md border border-gray bg-white text-sm text-gray-700 shadow-xs p-2"
+            value={formik.values.description}
+            onChange={formik.handleChange}
+          />
 
-        {formik.touched.description && formik.errors.description && (
-          <div className="text-red-500 text-xs mt-1">{formik.errors.description}</div>
-        )}
-      </div>
+          {formik.touched.description && formik.errors.description && (
+            <div className="text-red-500 text-xs mt-1">{formik.errors.description}</div>
+          )}
+        </div>
 
-      <div className="col-span-10">
-        <label htmlFor="price" className="block text-sm font-medium text-gray-700"> Precio Unitario </label>
+        <div className="col-span-10">
+          <label htmlFor="price" className="block text-sm font-medium text-gray-700"> Precio Unitario </label>
 
-        <input
-          type="number"
-          id="price"
-          name="price"
-          className="mt-1 w-full rounded-md border border-gray bg-white text-sm text-gray-700 shadow-xs p-2"
-          value={formik.values.price}
-          onChange={formik.handleChange}
-        />
+          <input
+            type="number"
+            id="price"
+            name="price"
+            className="mt-1 w-full rounded-md border border-gray bg-white text-sm text-gray-700 shadow-xs p-2"
+            value={formik.values.price}
+            onChange={formik.handleChange}
+          />
 
-        {formik.touched.price && formik.errors.price && (
-          <div className="text-red-500 text-xs mt-1">{formik.errors.price}</div>
-        )}
-      </div>
+          {formik.touched.price && formik.errors.price && (
+            <div className="text-red-500 text-xs mt-1">{formik.errors.price}</div>
+          )}
+        </div>
 
-      <div className="col-span-10">
-        <label htmlFor="stock" className="block text-sm font-medium text-gray-700"> Stock </label>
+        <div className="col-span-10">
+          <label htmlFor="stock" className="block text-sm font-medium text-gray-700"> Stock </label>
 
-        <input
-          type="number"
-          id="stock"
-          name="stock"
-          className="mt-1 w-full rounded-md border border-gray bg-white text-sm text-gray-700 shadow-xs p-2"
-          value={formik.values.stock}
-          onChange={formik.handleChange}
-        />
+          <input
+            type="number"
+            id="stock"
+            name="stock"
+            className="mt-1 w-full rounded-md border border-gray bg-white text-sm text-gray-700 shadow-xs p-2"
+            value={formik.values.stock}
+            onChange={formik.handleChange}
+          />
 
-        {formik.touched.stock && formik.errors.stock && (
-          <div className="text-red-500 text-xs mt-1">{formik.errors.stock}</div>
-        )}
-      </div>
+          {formik.touched.stock && formik.errors.stock && (
+            <div className="text-red-500 text-xs mt-1">{formik.errors.stock}</div>
+          )}
+        </div>
 
-      <div className="col-span-10 sm:flex sm:items-center sm:gap-4">
-        <button
-          type='submit'
-          className="block w-full rounded-sm bg-gray-900 px-4 py-3 text-sm font-medium text-white transition hover:scale-105"
-        >
-          {Number(id) ? 'Actualizar' : 'Crear'}
-        </button>
-      </div>
-    </form>
+        <div className="col-span-10 sm:flex sm:items-center sm:gap-4">
+          <button
+            type='submit'
+            className="block w-full rounded-sm bg-gray-900 px-4 py-3 text-sm font-medium text-white transition hover:scale-105"
+          >
+            {Number(id) ? 'Actualizar' : 'Crear'}
+          </button>
+        </div>
+      </form>
+    </>
   )
 }
 
