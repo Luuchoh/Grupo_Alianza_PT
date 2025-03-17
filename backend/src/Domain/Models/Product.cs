@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Domain.Models;
 
+/// <summary>
+/// Modelo o entidad usada para la creacion de la tabla en la BD
+/// </summary>
 public class Product
 {
     public int Id { get; set; }
