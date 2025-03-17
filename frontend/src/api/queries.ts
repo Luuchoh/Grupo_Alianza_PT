@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import axiosInstance from "./axiosInstance";
 
+import axiosInstance from "./axiosInstance";
 
 // Obtener todos los productos
 const getAllProducts = async (): Promise<Product[]> => {
@@ -8,7 +8,7 @@ const getAllProducts = async (): Promise<Product[]> => {
   return data;
 };
 
-// Hook de React Query para obtener productos
+// Hook para obtener productos
 export const useProducts = () => {
   return useQuery({
     queryKey: ["products"],
@@ -22,7 +22,7 @@ const getOneProduct = async (id: number): Promise<Product[]> => {
   return data;
 };
 
-// Obtener un producto por ID
+// Hook para obtener un producto por ID
 export const useProduct = (id: number) => {
   return useQuery({
     queryKey: ["product", id],
