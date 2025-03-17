@@ -1,9 +1,12 @@
 import React from "react"
 
+interface ProductCardInterface {
+  product: Product
+}
 
-const ProductCard: React.FC<Product> = (props) => {
+const ProductCard: React.FC<ProductCardInterface> = (props) => {
 
-  const {description, name, price} = props; 
+  const { product: { description, name, price } } = props;
 
   return (
     <a href="#" className="group relative block overflow-hidden">
