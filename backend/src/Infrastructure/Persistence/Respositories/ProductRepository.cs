@@ -1,4 +1,5 @@
-﻿using Application.Interfaces;
+﻿using Application.DTOs;
+using Application.Interfaces;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,14 +23,31 @@ namespace Infrastructure.Persistence.Respositories
             return await _context.Product.FindAsync(id);
         }
 
-        public async Task Add(Product producto) 
-        { 
+        public async Task<int> Add(ProductRequest productoDto) 
+        {
+            Product producto = new Product
+            {
+                Name = productoDto.Name,
+                Description = productoDto.Description,
+                Price = productoDto.Price,
+                Stock = productoDto.Stock
+            };
             _context.Product.Add(producto); 
-            await _context.SaveChangesAsync(); 
+            await _context.SaveChangesAsync();
+
+            return producto.Id;
         } 
-        public async Task Update(Product producto) 
-        { 
-            _context.Product.Update(producto); await _context.SaveChangesAsync();
+        public async Task Update(ProductRequest productoDto) 
+        {
+            Product producto = new Product
+            {
+                Name = productoDto.Name,
+                Description = productoDto.Description,
+                Price = productoDto.Price,
+                Stock = productoDto.Stock
+            };
+            _context.Product.Update(producto); 
+            await _context.SaveChangesAsync();
         } 
         public async Task Delete(int id) 
         { 
