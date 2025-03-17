@@ -30,6 +30,7 @@
       "@hooks/*": ["./src/hooks/*"],
       "@pages/*": ["./src/pages/*"],
       "@routes/*": ["./src/routes/*"],
+      "@layouts/*": ["./src/layouts/*"],
     }
   },
   "include": ["src", "vite-env.d.ts", "**/*.ts", "**/*.tsx"],
