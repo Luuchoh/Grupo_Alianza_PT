@@ -1,10 +1,18 @@
 
+using Application.Validators;
+using FluentValidation.AspNetCore;
+using FluentValidation;
 using Infrastructure.Config;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
+
+// Add services fluent validation
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddFluentValidationClientsideAdapters();
+builder.Services.AddValidatorsFromAssemblyContaining<ProductValidator>();
 
 // Agregar configuración de infraestructura
 builder.Services.AddInfrastructure(builder.Configuration);
@@ -23,6 +31,7 @@ builder.Services.AddCors(options =>
                   .AllowAnyOrigin();
         });
 });
+
 
 var app = builder.Build();
 

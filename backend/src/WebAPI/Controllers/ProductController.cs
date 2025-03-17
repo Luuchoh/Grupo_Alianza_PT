@@ -1,4 +1,5 @@
-﻿using Application.Interfaces;
+﻿using Application.DTOs;
+using Application.Interfaces;
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,11 +10,12 @@ namespace WebAPI.Controllers
     public class ProductoController : ControllerBase 
     { 
         private readonly IProduct _repository; 
+        
         public ProductoController(IProduct repository) 
         {
             _repository = repository; 
         }
-
+        
         [HttpGet]
         public async Task<IActionResult> Get()
         {
@@ -21,58 +23,69 @@ namespace WebAPI.Controllers
             {
                 List<Product> productList = await _repository.GetAll();
                 return Ok(productList);
-            } catch (Exception e)
+            } 
+            catch (Exception e)
             {
-                return BadRequest(e);
+                return StatusCode(500, $"Error interno: {e.Message}");
             }
         }
-
+        
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<IActionResult> GetById(int id) 
         {
             try
             {
                 Product product = await _repository.GetById(id);
-                if (product == null) return NoContent();
+                if (product == null) return NotFound();
                 return Ok(product);
             }
             catch (Exception e)
             {
-                return BadRequest(e);
+                return StatusCode(500, $"Error interno: {e.Message}");
             }
         }
-
+        
         [HttpPost] 
-        public async Task<IActionResult> Create(Product producto) 
+        public async Task<IActionResult> Create([FromBody] ProductRequest productoDTO) 
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
             try
             {
-                await _repository.Add(producto);
-                return CreatedAtAction(nameof(GetById), new { id = producto.Id }, producto);
+                var id = await _repository.Add(productoDTO);
+
+                productoDTO.Id = id;    
+                
+                return Created($"api/producto/{productoDTO.Id}", productoDTO);
+                
             }
             catch (Exception e)
             {
-                return BadRequest(e);
+                return StatusCode(500, $"Error interno: {e.Message}");
             }
         } 
-
+        
         [HttpPut("{id}")] 
-        public async Task<IActionResult> Update(int id, Product producto) 
+        public async Task<IActionResult> Update(int id, [FromBody] ProductRequest productoDTO) 
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
             try
             {
-                if (id != producto.Id) return BadRequest();
-                await _repository.Update(producto);
+                if (id != productoDTO.Id) 
+                    return BadRequest("El ID en la ruta no coincide con el ID del producto");
+                    
+                await _repository.Update(productoDTO);
                 return NoContent();
             }
             catch (Exception e)
             {
-                return BadRequest(e);
+                return StatusCode(500, $"Error interno: {e.Message}");
             }
         } 
     
         [HttpDelete("{id}")] 
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int id) 
         {
             try
             {
@@ -81,9 +94,8 @@ namespace WebAPI.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest(e);
+                return StatusCode(500, $"Error interno: {e.Message}");
             }
-            
         } 
     }
 }
