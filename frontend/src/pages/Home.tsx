@@ -1,10 +1,9 @@
-import ProductCard from "@components/ProductCard"
+import ProductList from "@components/ProductList"
 
 const Home = () => {
   return (
     <>
-      <div>Home</div>
-      <ProductCard />
+      <ProductList />
     </>
   )
 }
