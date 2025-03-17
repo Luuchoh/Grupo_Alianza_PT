@@ -11,7 +11,7 @@ const LayoutBase = (props: any) => {
         </NavLink>
         <nav className="flex gap-4">
           <NavLink to="/" className="text-white hover:underline">Inicio</NavLink>
-          <NavLink to="/AddProduct" className="text-white hover:underline">Agregar</NavLink>
+          <NavLink to="/create-product" className="text-white hover:underline">Agregar</NavLink>
         </nav>
       </header>
 

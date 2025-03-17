@@ -2,7 +2,7 @@ import { useRoutes } from "react-router";
 
 import Home from "@pages/Home";
 import Product from "@pages/Product";
-import AddProduct from "@pages/AddProduct";
+import FormProduct from "@pages/FormProduct";
 
 const Router = () => {
   let element = useRoutes([
@@ -11,17 +11,17 @@ const Router = () => {
       element: <Home />
     },
     {
-      path: "/ProductDetail/:id",
+      path: "/detail-product/:id",
       element: <Product />
     },
     {
-      path: "/AddProduct",
-      element: <AddProduct />
+      path: "/create-product",
+      element: <FormProduct />
     },
     
     {
-      path: "/EditProduct/:id",
-      element: <AddProduct />
+      path: "/edit-product/:id",
+      element: <FormProduct />
     },
   ]);
 
