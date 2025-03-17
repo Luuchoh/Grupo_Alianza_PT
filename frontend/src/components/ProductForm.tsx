@@ -10,6 +10,9 @@ interface ProductFormInterface {
   product?: Product;
 }
 
+/**
+ * Esquema de validaciones de productos (se puede separar)
+ */
 const ProductSchema = Yup.object().shape({
   name: Yup.string()
     .min(2, 'Nombre demasiado corto')
@@ -28,6 +31,14 @@ const ProductSchema = Yup.object().shape({
     .required('Stock es requerido')
 });
 
+/**
+ * Componente que muestra un formulario de creacion o edicion dependiendo los parametros
+ * 
+ * @param { ProductFormInterface } props - propiedades del componente
+ * @param { number } props.id - ID del producto
+ * @param { Product } props.product - Objeto con la informacion del producto
+ * @returns componente 
+ */
 const ProductForm: React.FC<ProductFormInterface> = (props) => {
 
   const { id, product = { id: null, name: "", description: "", price: 0, stock: 0 } } = props
@@ -36,6 +47,12 @@ const ProductForm: React.FC<ProductFormInterface> = (props) => {
   const createProductMutation = useCreateProduct();
   const updateProductMutation = useUpdateProduct();
 
+  /**
+   * Creacion de formulario
+   * inicializando valores
+   * integrando el esquema de validaciones
+   * funcion que ejecutara el formulario
+   */
   const formik = useFormik({
     initialValues: product,
     validationSchema: ProductSchema,

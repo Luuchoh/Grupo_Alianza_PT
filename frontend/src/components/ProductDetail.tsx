@@ -8,6 +8,12 @@ import ModalWarning from "./ModalWarning";
 import { useProduct } from "@api/queries";
 import { useDeleteProduct } from "@api/mutations";
 
+/**
+ * Componente que muestra toda la informacion de un producto
+ * 
+ * @returns componente 
+ */
+
 const ProductDetail = () => {
   let params = useParams();
   let id = params.id;
@@ -18,15 +24,23 @@ const ProductDetail = () => {
 
   const [Modal, setModal] = useState<boolean>(false);
 
+  // Pagina que se muestra mientras carga la info
   if (isLoading) return <Loading />;
+  // Pagina que se muestra si hay un error en la peticion
   if (isError) return <ErrorMessage title="Bad Request" description="Error al cargar productos" />;
 
   const {name, description, price, stock} = product;
 
+  /**
+   * Funcion que abre y cierra el modal
+   */
   const handleModal = () => {
     setModal(!Modal)
   }
 
+  /**
+   * Funcion que elimina un producto
+   */
   const confirmDelete = () => {
     deleteProductMutation.mutate(Number(id))
     navigate("/")

@@ -3,10 +3,18 @@ import ErrorMessage from "./ErrorMessage";
 import Loading from "./Loading";
 import ProductCard from "./ProductCard";
 
+/**
+ * Componente que lista los productos con ayuda de productCard
+ * 
+ * @returns componente 
+ */
+
 const ProductList = () => {
   const { data: products, isLoading, isError } = useProducts();
 
+  // Pagina que se muestra mientras carga la info
   if (isLoading) return <Loading />;
+  // Pagina que se muestra si hay un error en la peticion
   if (isError) return <ErrorMessage title="Bad Request" description="Error al cargar productos" />;
 
   return (

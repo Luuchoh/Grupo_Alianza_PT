@@ -5,9 +5,18 @@ interface ErrorMessageInterface {
   description: string;
 }
 
+/**
+ * Componente que muestra una pantalla de error
+ * 
+ * @param { ErrorMessageInterface } props - propiedades del componente
+ * @param { string } props.title - titulo del error
+ * @param { string } props.description - descripcion del error
+ * @returns componente 
+ */
+
 const ErrorMessage: React.FC<ErrorMessageInterface> = (props) => {
 
-  const {title, description} = props;
+  const { title, description } = props;
 
   return (
     <div className="flex h-screen flex-col bg-white dark:bg-gray-900">

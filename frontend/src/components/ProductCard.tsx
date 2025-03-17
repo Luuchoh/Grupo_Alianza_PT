@@ -5,6 +5,14 @@ interface ProductCardInterface {
   product: Product
 }
 
+/**
+ * Componente que muestra una card con la informacion del producto
+ * 
+ * @param { ProductCardInterface } props - propiedades del componente
+ * @param { Product } props.product - Objeto/diccionario con la informacion del producto
+ * @returns componente 
+ */
+
 const ProductCard: React.FC<ProductCardInterface> = (props) => {
 
   const { product: { id, description, name, price } } = props;
