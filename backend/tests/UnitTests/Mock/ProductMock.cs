@@ -7,7 +7,10 @@ namespace UnitTests.Mock
 {
     public class ProductMock
     {
-
+        /// <summary>
+        /// Constructor del DBSet de productos en el contexto de la BD
+        /// </summary>
+        /// <param name="_mockContext">mock del context de la BD</param>
         public ProductMock(Mock<AplicationDbContext> _mockContext) 
         {
 
@@ -22,6 +25,7 @@ namespace UnitTests.Mock
 
             var products = new List<Product>() { expectedProduct }.AsQueryable();
 
+            // Setup for IQueryable
             var _mockDbSet = new Mock<DbSet<Product>>();
             _mockDbSet.As<IQueryable<Product>>().Setup(m => m.Provider).Returns(products.Provider);
             _mockDbSet.As<IQueryable<Product>>().Setup(m => m.Expression).Returns(products.Expression);
