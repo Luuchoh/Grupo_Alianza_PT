@@ -5,10 +5,12 @@ using System.Xml.Linq;
 
 namespace Infrastructure.Persistence
 {
+    /// <summary>
+    /// Contexto de la base de datos utilizado por EF
+    /// </summary>
     public class AplicationDbContext : DbContext
     {
         public virtual DbSet<Product> Product { get; set; }
-
         public AplicationDbContext() { }
         public AplicationDbContext(DbContextOptions<AplicationDbContext> options) : base(options) { }
 

@@ -13,16 +13,26 @@ namespace Infrastructure.Persistence.Respositories
         {
             _context = context; 
         }
+        /// <summary>
+        /// Trae la informacion todos los productos de la BD
+        /// </summary>
         public async Task<List<Product>> GetAll()
         {
             var productos = await _context.Product.ToListAsync();
             return productos;
         }
+        /// <summary>
+        /// Trae la informacion de un producto en concreto
+        /// </summary>
+        /// <param name="id">id del producto</param>
         public async Task<Product> GetById(int id)
         {
             return await _context.Product.FindAsync(id);
         }
-
+        /// <summary>
+        /// Crea o agrega un producto al BD
+        /// </summary>
+        /// <param name="productoDto">Diccionario del producto a crear</param>
         public async Task<int> Add(ProductRequest productoDto) 
         {
             Product producto = new Product
@@ -36,7 +46,12 @@ namespace Infrastructure.Persistence.Respositories
             await _context.SaveChangesAsync();
 
             return producto.Id;
-        } 
+        }
+        /// <summary>
+        /// Actualiza un producto
+        /// </summary>
+        /// <param name="id">id del producto</param>
+        /// <param name="productoDto">Diccionario del producto a editar</param>
         public async Task Update(ProductRequest productoDto) 
         {
             Product producto = new Product
@@ -48,7 +63,10 @@ namespace Infrastructure.Persistence.Respositories
             };
             _context.Product.Update(producto); 
             await _context.SaveChangesAsync();
-        } 
+        }
+        /// <summary>
+        /// Elimina un producto de la BD
+        /// </summary>
         public async Task Delete(int id) 
         { 
             var producto = await _context.Product.FindAsync(id); 
