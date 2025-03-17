@@ -98,7 +98,7 @@ Acceda al proyecto navegando hasta `http://localhost:5051/swagger/index.html` en
 
 ### 6\. Ejecutar el servidor de frontend de desarrollo
 
-Abre una nueva terminal
+Abre una nueva terminal posicionandote en la carpeta frontend.
 
 Inicia el servidor de desarrollo React.
 
