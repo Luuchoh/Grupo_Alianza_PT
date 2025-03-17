@@ -56,6 +56,7 @@ namespace Infrastructure.Persistence.Respositories
         {
             Product producto = new Product
             {
+                Id = (int) productoDto.Id,
                 Name = productoDto.Name,
                 Description = productoDto.Description,
                 Price = productoDto.Price,
