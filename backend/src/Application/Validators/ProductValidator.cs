@@ -3,6 +3,9 @@ using FluentValidation;
 
 namespace Application.Validators
 {
+    /// <summary>
+    /// Validaciones para el DTO productRequest
+    /// </summary>
     public class ProductValidator : AbstractValidator<ProductRequest>
     {
         public ProductValidator()
