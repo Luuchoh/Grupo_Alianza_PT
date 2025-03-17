@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from "react-router";
 
 interface ProductCardInterface {
   product: Product
@@ -6,10 +7,10 @@ interface ProductCardInterface {
 
 const ProductCard: React.FC<ProductCardInterface> = (props) => {
 
-  const { product: { description, name, price } } = props;
+  const { product: { id, description, name, price } } = props;
 
   return (
-    <a href="#" className="group relative block overflow-hidden">
+    <Link to={`ProductDetail/${id}`} className="group relative block overflow-hidden" >
       <button
         className="absolute end-4 top-4 z-10 rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75"
       >
@@ -39,7 +40,7 @@ const ProductCard: React.FC<ProductCardInterface> = (props) => {
 
       <div className="relative border border-gray-100 bg-white p-6">
         <p className="text-gray-700">
-          {price}
+          $ {price}
         </p>
 
         <h3 className="mt-1.5 text-lg font-medium text-gray-900">{name}</h3>
@@ -63,7 +64,7 @@ const ProductCard: React.FC<ProductCardInterface> = (props) => {
           </button>
         </form>
       </div>
-    </a>
+    </Link>
   )
 }
 
