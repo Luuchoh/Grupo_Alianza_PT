@@ -4,6 +4,12 @@ import Home from "@pages/Home";
 import Product from "@pages/Product";
 import FormProduct from "@pages/FormProduct";
 
+/**
+ * Enrutamiento de todas las paginas
+ * 
+ * @returns Enrutamiento
+ */
+
 const Router = () => {
   let element = useRoutes([
     {
