@@ -1,11 +1,32 @@
-import { useCreateProduct, useUpdateProduct } from '@api/mutations';
-import React, { useState } from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+
+import { useCreateProduct, useUpdateProduct } from '@api/mutations';
 
 interface ProductFormInterface {
   id?: number;
   product?: Product;
 }
+
+const ProductSchema = Yup.object().shape({
+  name: Yup.string()
+    .min(2, 'Nombre demasiado corto')
+    .max(50, 'Nombre demasiado largo')
+    .required('Nombre es requerido'),
+  description: Yup.string()
+    .min(5, 'Descripción demasiado corta')
+    .max(500, 'Descripción demasiado larga')
+    .required('Descripción es requerida'),
+  price: Yup.number()
+    .positive('El precio debe ser positivo')
+    .required('Precio es requerido'),
+  stock: Yup.number()
+    .integer('El stock debe ser un número entero')
+    .min(0, 'El stock no puede ser negativo')
+    .required('Stock es requerido')
+});
 
 const ProductForm: React.FC<ProductFormInterface> = (props) => {
 
@@ -15,25 +36,24 @@ const ProductForm: React.FC<ProductFormInterface> = (props) => {
   const createProductMutation = useCreateProduct();
   const updateProductMutation = useUpdateProduct();
 
-  const [newProduct, setNewProduct] = useState<Product>(product);
+  const formik = useFormik({
+    initialValues: product,
+    validationSchema: ProductSchema,
+    onSubmit: (values) => {
+      if (Number(id)) {
+        updateProductMutation.mutate(values);
+      } else {
+        createProductMutation.mutate(values);
+      }
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (Number(id)) {
-      updateProductMutation.mutate(newProduct);
-    } else {
-      createProductMutation.mutate(newProduct);
+      navigate("/");
     }
-
-    navigate("/")
-
-  }
+  });
 
   return (
-    <form onSubmit={handleSubmit} className="mt-8 w-full grid gap-6">
+    <form onSubmit={formik.handleSubmit} className="mt-8 w-full grid gap-6">
       <div className="col-span-10">
-        <label htmlFor="FirstName" className="block text-sm font-medium text-gray-700">
+        <label htmlFor="name" className="block text-sm font-medium text-gray-700">
           Nombre
         </label>
 
@@ -41,14 +61,18 @@ const ProductForm: React.FC<ProductFormInterface> = (props) => {
           type="text"
           id="name"
           name="name"
-          className="mt-1 w-full rounded-md border-gray bg-white text-sm text-gray-700 shadow-xs p-2"
-          value={newProduct.name}
-          onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })}
+          className="mt-1 w-full rounded-md border border-gray bg-white text-sm text-gray-700 shadow-xs p-2"
+          value={formik.values.name}
+          onChange={formik.handleChange}
         />
+
+        {formik.touched.name && formik.errors.name && (
+          <div className="text-red-500 text-xs mt-1">{formik.errors.name}</div>
+        )}
       </div>
 
       <div className="col-span-10">
-        <label htmlFor="LastName" className="block text-sm font-medium text-gray-700">
+        <label htmlFor="description" className="block text-sm font-medium text-gray-700">
           Descripcion
         </label>
 
@@ -56,44 +80,56 @@ const ProductForm: React.FC<ProductFormInterface> = (props) => {
           type="text"
           id="description"
           name="description"
-          className="mt-1 w-full rounded-md border-gray bg-white text-sm text-gray-700 shadow-xs p-2"
-          value={newProduct.description}
-          onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })}
+          className="mt-1 w-full rounded-md border border-gray bg-white text-sm text-gray-700 shadow-xs p-2"
+          value={formik.values.description}
+          onChange={formik.handleChange}
         />
+
+        {formik.touched.description && formik.errors.description && (
+          <div className="text-red-500 text-xs mt-1">{formik.errors.description}</div>
+        )}
       </div>
 
       <div className="col-span-10">
-        <label htmlFor="Email" className="block text-sm font-medium text-gray-700"> Precio Unitario </label>
+        <label htmlFor="price" className="block text-sm font-medium text-gray-700"> Precio Unitario </label>
 
         <input
           type="number"
           id="price"
           name="price"
-          className="mt-1 w-full rounded-md border-gray bg-white text-sm text-gray-700 shadow-xs p-2"
-          value={newProduct.price}
-          onChange={(e) => setNewProduct({ ...newProduct, price: Number(e.target.value) })}
+          className="mt-1 w-full rounded-md border border-gray bg-white text-sm text-gray-700 shadow-xs p-2"
+          value={formik.values.price}
+          onChange={formik.handleChange}
         />
+
+        {formik.touched.price && formik.errors.price && (
+          <div className="text-red-500 text-xs mt-1">{formik.errors.price}</div>
+        )}
       </div>
 
       <div className="col-span-10">
-        <label htmlFor="Password" className="block text-sm font-medium text-gray-700"> Stock </label>
+        <label htmlFor="stock" className="block text-sm font-medium text-gray-700"> Stock </label>
 
         <input
           type="number"
           id="stock"
           name="stock"
-          className="mt-1 w-full rounded-md border-gray bg-white text-sm text-gray-700 shadow-xs p-2"
-          value={newProduct.stock}
-          onChange={(e) => setNewProduct({ ...newProduct, stock: Number(e.target.value) })}
+          className="mt-1 w-full rounded-md border border-gray bg-white text-sm text-gray-700 shadow-xs p-2"
+          value={formik.values.stock}
+          onChange={formik.handleChange}
         />
+
+        {formik.touched.stock && formik.errors.stock && (
+          <div className="text-red-500 text-xs mt-1">{formik.errors.stock}</div>
+        )}
       </div>
 
       <div className="col-span-10 sm:flex sm:items-center sm:gap-4">
         <button
           type='submit'
-          className="inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:ring-3 focus:outline-hidden"
+          className="block w-full rounded-sm bg-gray-900 px-4 py-3 text-sm font-medium text-white transition hover:scale-105"
         >
-          Crear
+          {Number(id) ? 'Actualizar' : 'Crear'}
         </button>
       </div>
     </form>
