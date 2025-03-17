@@ -1,3 +1,4 @@
+import { NavLink } from "react-router";
 
 const LayoutBase = (props: any) => {
 
@@ -6,12 +7,12 @@ const LayoutBase = (props: any) => {
   return (
     <div className="flex flex-col items-center w-full h-screen">
       <header className="w-full bg-gray-800 p-4 flex justify-between items-center shadow-md">
-          <a href="#" className="h-8 w-8">
+          <NavLink to="/" className="h-8 w-8">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/LEGO_logo.svg/1200px-LEGO_logo.svg.png" alt="Empresa Logo" />
-          </a>
+          </NavLink>
           <nav className="flex gap-4">
-            <a href="#" className="text-white hover:underline">Inicio</a>
-            <a href="#" className="text-white hover:underline">Agregar</a>
+            <NavLink to="/" className="text-white hover:underline">Inicio</NavLink>
+            <NavLink to="/AddProduct" className="text-white hover:underline">Agregar</NavLink>
           </nav>
       </header>
 
