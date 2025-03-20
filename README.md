@@ -59,7 +59,7 @@ Abres SQL Server Management y copias el servername e ingresas al gestor.
 
 ![alt text](image.png)
 
-Te diriges manualmente a la carpeta backend/src/WebAPI e ingresas al archivo appsettings.json y cambias el nombre del servidor por el que copiaste en el anterior paso.
+Te diriges manualmente a la carpeta backend/src/WebAPI e ingresas al archivo appsettings.json y cambias el nombre del servidor por el que copiaste anteriormente.
 
 ```C#
 {
@@ -108,7 +108,7 @@ pnpm run dev
 
 Acceda al proyecto navegando hasta `http://localhost:3000` en su navegador web.
 
-Project Structure
+Estrutura de la WebAPI
 -----------------
 
 *   **product**: Gestiona todo lo relacionado con los productos.
